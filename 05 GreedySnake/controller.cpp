@@ -461,7 +461,7 @@ int Controller::GameOver()//游戏结束界面
     Sleep(500);
     SetColor(11);
     SetCursorPosition(10, 8);
-    std::cout << "━━━━━━━━━━━━━━━━━━━━━━";
+    std::cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
     Sleep(30);
     SetCursorPosition(9, 9);
     std::cout << " ┃               Game Over !!!              ┃";
@@ -502,7 +502,7 @@ int Controller::GameOver()//游戏结束界面
     std::cout << " ┃                                          ┃";
     Sleep(30);
     SetCursorPosition(10, 21);
-    std::cout << "━━━━━━━━━━━━━━━━━━━━━━";
+    std::cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
 
     Sleep(100);
     SetCursorPosition(12, 18);
