@@ -1,6 +1,12 @@
+#include <Windows.h>
 #include "startinterface.h"
-#include <windows.h>
 
+void StartInterface::Action()
+{
+    PrintFirst();
+    PrintSecond();
+    PrintThird();
+}
 
 void StartInterface::PrintFirst()//蛇从左边出现到完全出现的过程
 {
@@ -13,7 +19,7 @@ void StartInterface::PrintFirst()//蛇从左边出现到完全出现的过程
 
 void StartInterface::PrintSecond()//蛇从左向右移动的过程
 {
-    for (int i = 10; i != 40; ++i) //蛇头需要从10移动到40
+    for (int i = 10; i != 41; ++i) //蛇头需要从10移动到41
     {
         /*计算蛇头的下一个位置，并将其压入startsnake中，绘制出来，将蛇尾去掉*/
         int j = (((i - 2) % 8) < 4) ? (15 + (i - 2) % 8) : (21 - (i - 2) % 8);
@@ -58,11 +64,3 @@ void StartInterface::ClearText()
         point.ChangePosition(point.GetX() + 1, point.GetY());
     }
 }
-
-void StartInterface::Action()
-{
-    PrintFirst();
-    PrintSecond();
-    PrintThird();
-}
-

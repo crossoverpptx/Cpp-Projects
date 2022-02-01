@@ -5,11 +5,10 @@
 #include <vector>
 #include "point.h"
 
-class StartInterface
-{
+class StartInterface {
 public:
     StartInterface() : speed(35) {
-        startsnake.emplace_back(Point(0, 14));//Éß
+        startsnake.emplace_back(Point(0, 14));
         startsnake.emplace_back(Point(1, 14));
         startsnake.emplace_back(Point(2, 15));
         startsnake.emplace_back(Point(3, 16));
@@ -78,15 +77,16 @@ public:
         textsnake.emplace_back(Point(0, 16));
         textsnake.emplace_back(Point(0, 18));
     }
+    void Action();
     void PrintFirst();
     void PrintSecond();
     void PrintThird();
     void PrintText();
     void ClearText();
-    void Action();
 private:
     std::deque<Point> startsnake;//开始动画中的蛇
     std::vector<Point> textsnake;//开始动画中的文字
     int speed;//动画的速度
 };
+
 #endif // STRATINTERFACE_H

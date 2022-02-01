@@ -2,17 +2,16 @@
 #define FOOD_H
 
 #include "snake.h"
+
 class Snake;
-class Food
-{
+class Food {
 public:
     Food() : cnt(0), flash_flag(false), big_flag(false), x(0), y(0), big_x(0), big_y(0), progress_bar(0) {}
     void DrawFood(Snake&);
     void DrawBigFood(Snake&);
-    int GetCnt();
-    void FlashBigFood();
-    bool GetBigFlag();
     int GetProgressBar();
+    bool GetBigFlag();
+    void FlashBigFood();
 private:
     int cnt;
     bool flash_flag;//闪烁标记
@@ -22,5 +21,5 @@ private:
     int progress_bar;//限时食物进度条
     friend class Snake;
 };
-#endif // FOOD_H
 
+#endif // FOOD_H

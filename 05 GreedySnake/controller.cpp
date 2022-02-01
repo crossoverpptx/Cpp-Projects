@@ -1,13 +1,37 @@
 #include <iostream>
-#include <time.h>
+#include <Windows.h>
 #include <conio.h>
-#include <windows.h>
 #include "controller.h"
 #include "tools.h"
 #include "startinterface.h"
 #include "map.h"
 #include "snake.h"
 #include "food.h"
+
+void Controller::Game()//游戏一级循环
+{
+    ShowConsoleCursor(false);//设置光标不闪烁
+    Start();//开始界面
+    while (true)//游戏可视为一个死循环，直到退出游戏时循环结束
+    {
+        Select();//选择界面
+        DrawGame();//绘制游戏界面
+        int tmp = PlayGame();//开启游戏循环，当重新开始或退出游戏时，结束循环并返回值给tmp
+        if (tmp == 1) //返回值为1时重新开始游戏
+        {
+            system("cls");
+            continue;
+        }
+        else if (tmp == 2) //返回值为2时退出游戏
+        {
+            break;
+        }
+        else
+        {
+            break;
+        }
+    }
+}
 
 void Controller::Start()//开始界面
 {
@@ -46,7 +70,7 @@ void Controller::Select()//选择界面
     std::cout << "困难模式";
     SetCursorPosition(27, 28);
     std::cout << "炼狱模式";
-    SetCursorPosition(0, 31);
+    //SetCursorPosition(0, 31);
     score = 0;
 
     /*上下方向键选择模块*/
@@ -67,7 +91,7 @@ void Controller::Select()//选择界面
                     SetBackColor();
                     std::cout << "简单模式";
 
-                    SetCursorPosition(27, 24);//将已选中项取消我背景色
+                    SetCursorPosition(27, 24);//将已选中项取消背景色
                     SetColor(3);
                     std::cout << "普通模式";
 
@@ -146,7 +170,7 @@ void Controller::Select()//选择界面
         }
         if (flag) break;//输入Enter回车键确认，退出检查输入循环
 
-        SetCursorPosition(0, 31);//将光标置于左下角，避免关标闪烁影响游戏体验
+        //SetCursorPosition(0, 31);//将光标置于左下角，避免关标闪烁影响游戏体验
     }
 
     switch (key)//根据所选选项设置蛇的移动速度，speed值越小，速度越快
@@ -293,30 +317,6 @@ int Controller::PlayGame()//游戏二级循环
     }
 }
 
-void Controller::UpdateScore(const int& tmp)//更新分数
-{
-    score += key * 10 * tmp;//所得分数根据游戏难度及传人的参数tmp确定
-}
-
-void Controller::RewriteScore()//重绘分数
-{
-    /*为保持分数尾部对齐，将最大分数设置为6位，计算当前分数位数，将剩余位数用空格补全，再输出分数*/
-    SetCursorPosition(37, 8);
-    SetColor(11);
-    int bit = 0;
-    int tmp = score;
-    while (tmp != 0)
-    {
-        ++bit;
-        tmp /= 10;
-    }
-    for (int i = 0; i < (6 - bit); ++i)
-    {
-        std::cout << " ";
-    }
-    std::cout << score;
-}
-
 int Controller::Menu()//选择菜单
 {
     /*绘制菜单*/
@@ -334,7 +334,7 @@ int Controller::Menu()//选择菜单
     Sleep(100);
     SetCursorPosition(34, 25);
     std::cout << "退出游戏";
-    SetCursorPosition(0, 31);
+    //SetCursorPosition(0, 31);
 
     /*选择部分*/
     int ch;
@@ -414,7 +414,7 @@ int Controller::Menu()//选择菜单
         {
             break;
         }
-        SetCursorPosition(0, 31);
+        //SetCursorPosition(0, 31);
     }
 
     if (tmp_key == 1) //选择继续游戏，则将菜单擦除
@@ -431,28 +431,28 @@ int Controller::Menu()//选择菜单
     return tmp_key;
 }
 
-void Controller::Game()//游戏一级循环
+void Controller::UpdateScore(const int& tmp)//更新分数
 {
-    Start();//开始界面
-    while (true)//游戏可视为一个死循环，直到退出游戏时循环结束
+    score += key * 10 * tmp;//所得分数根据游戏难度及传人的参数tmp确定
+}
+
+void Controller::RewriteScore()//重绘分数
+{
+    /*为保持分数尾部对齐，将最大分数设置为6位，计算当前分数位数，将剩余位数用空格补全，再输出分数*/
+    SetCursorPosition(37, 8);
+    SetColor(11);
+    int bit = 0;
+    int tmp = score;
+    while (tmp != 0)
     {
-        Select();//选择界面
-        DrawGame();//绘制游戏界面
-        int tmp = PlayGame();//开启游戏循环，当重新开始或退出游戏时，结束循环并返回值给tmp
-        if (tmp == 1) //返回值为1时重新开始游戏
-        {
-            system("cls");
-            continue;
-        }
-        else if (tmp == 2) //返回值为2时退出游戏
-        {
-            break;
-        }
-        else
-        {
-            break;
-        }
+        ++bit;
+        tmp /= 10;
     }
+    for (int i = 0; i < (6 - bit); ++i)
+    {
+        std::cout << " ";
+    }
+    std::cout << score;
 }
 
 int Controller::GameOver()//游戏结束界面
@@ -461,7 +461,7 @@ int Controller::GameOver()//游戏结束界面
     Sleep(500);
     SetColor(11);
     SetCursorPosition(10, 8);
-    std::cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
+    std::cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
     Sleep(30);
     SetCursorPosition(9, 9);
     std::cout << " ┃               Game Over !!!              ┃";
@@ -502,13 +502,13 @@ int Controller::GameOver()//游戏结束界面
     std::cout << " ┃                                          ┃";
     Sleep(30);
     SetCursorPosition(10, 21);
-    std::cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
+    std::cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
 
     Sleep(100);
     SetCursorPosition(12, 18);
     SetBackColor();
     std::cout << "嗯，好的";
-    SetCursorPosition(0, 31);
+    //SetCursorPosition(0, 31);
 
     /*选择部分*/
     int ch;
@@ -552,7 +552,7 @@ int Controller::GameOver()//游戏结束界面
             break;
         }
 
-        SetCursorPosition(0, 31);
+        //SetCursorPosition(0, 31);
         if (flag) {
             break;
         }

@@ -1,7 +1,7 @@
-#include "snake.h"
-#include <conio.h>
-#include "tools.h"
 #include <iostream>
+#include <conio.h>
+#include "snake.h"
+#include "tools.h"
 
 void Snake::InitSnake()//初始化蛇
 {
@@ -11,42 +11,12 @@ void Snake::InitSnake()//初始化蛇
     }
 }
 
-void Snake::Move()//蛇增长
-{
-    switch (direction)
-    {
-    case Direction::UP:
-        snake.emplace_back(Point(snake.back().GetX(), snake.back().GetY() - 1));
-        break;
-    case Direction::DOWN:
-        snake.emplace_back(Point(snake.back().GetX(), snake.back().GetY() + 1));
-        break;
-    case Direction::LEFT:
-        snake.emplace_back(Point(snake.back().GetX() - 1, snake.back().GetY()));
-        break;
-    case Direction::RIGHT:
-        snake.emplace_back(Point(snake.back().GetX() + 1, snake.back().GetY()));
-        break;
-    default:
-        break;
-    }
-    SetColor(14);
-    snake.back().PrintCircular();
-}
-
-void Snake::NormalMove()//蛇正常移动，头增长，尾缩短
-{
-    Move();
-    snake.front().Clear();
-    snake.pop_front();
-}
-
 bool Snake::OverEdge()//超出边界
 {
-    return snake.back().GetX() < 30 &&
-        snake.back().GetY() < 30 &&
-        snake.back().GetX() > 1 &&
-        snake.back().GetY() > 1;
+    return snake.back().GetX() < 30 
+        && snake.back().GetY() < 30 
+        && snake.back().GetX() > 1 
+        && snake.back().GetY() > 1;
 }
 
 bool Snake::HitItself()//撞到自身
@@ -117,6 +87,36 @@ bool Snake::GetFood(const Food& cfood)
         return true;
     else
         return false;
+}
+
+void Snake::Move()//蛇增长
+{
+    switch (direction)
+    {
+    case Direction::UP:
+        snake.emplace_back(Point(snake.back().GetX(), snake.back().GetY() - 1));
+        break;
+    case Direction::DOWN:
+        snake.emplace_back(Point(snake.back().GetX(), snake.back().GetY() + 1));
+        break;
+    case Direction::LEFT:
+        snake.emplace_back(Point(snake.back().GetX() - 1, snake.back().GetY()));
+        break;
+    case Direction::RIGHT:
+        snake.emplace_back(Point(snake.back().GetX() + 1, snake.back().GetY()));
+        break;
+    default:
+        break;
+    }
+    SetColor(14);
+    snake.back().PrintCircular();
+}
+
+void Snake::NormalMove()//蛇正常移动，头增长，尾缩短
+{
+    Move();
+    snake.front().Clear();
+    snake.pop_front();
 }
 
 bool Snake::GetBigFood(Food& cfood)

@@ -1,5 +1,5 @@
+#include <Windows.h>
 #include "map.h"
-#include <windows.h>
 
 void Map::PrintInitmap()//ªÊ÷∆≥ı ºµÿÕº
 {

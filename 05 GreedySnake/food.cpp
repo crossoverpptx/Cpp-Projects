@@ -1,8 +1,6 @@
+#include <iostream>
 #include "food.h"
 #include "tools.h"
-#include <cstdlib>
-#include <iostream>
-
 
 void Food::DrawFood(Snake& csnake)//绘制食物
 {
@@ -74,9 +72,14 @@ void Food::DrawBigFood(Snake& csnake)//绘制限时食物
     }
 }
 
-int Food::GetCnt()
+int Food::GetProgressBar()
 {
-    return cnt;
+    return progress_bar;
+}
+
+bool Food::GetBigFlag()
+{
+    return big_flag;
 }
 
 void Food::FlashBigFood()//闪烁限时食物
@@ -106,14 +109,4 @@ void Food::FlashBigFood()//闪烁限时食物
         big_x = 0;
         big_y = 0;
     }
-}
-
-bool Food::GetBigFlag()
-{
-    return big_flag;
-}
-
-int Food::GetProgressBar()
-{
-    return progress_bar;
 }

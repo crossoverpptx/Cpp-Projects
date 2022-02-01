@@ -6,8 +6,7 @@
 #include "food.h"
 
 class Food;
-class Snake
-{
+class Snake {
 public:
     enum Direction { UP, DOWN, LEFT, RIGHT };
 
@@ -18,16 +17,17 @@ public:
         direction = Direction::DOWN;
     }
     void InitSnake();
-    void Move();
-    void NormalMove();
     bool OverEdge();
     bool HitItself();
     bool ChangeDirection();
     bool GetFood(const Food&);
+    void Move();
+    void NormalMove();
     bool GetBigFood(Food&);
 private:
     std::deque<Point> snake;
     Direction direction;
     friend class Food;//将Food类置为友元，以便访问其私有元素
 };
+
 #endif // SNAKE_H

@@ -4,8 +4,7 @@
 #include <vector>
 #include "point.h"
 
-class Map
-{
+class Map {
 public:
     Map()//默认构造函数，将正方形各点压入initmap
     {
@@ -134,4 +133,5 @@ private:
     std::vector<Point> map2;
     */
 };
+
 #endif // MAP_H
